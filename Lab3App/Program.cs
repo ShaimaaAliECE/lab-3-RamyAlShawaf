@@ -25,10 +25,10 @@ namespace Lab3App
                 possibleCollectiable.Add(new Diamond("Diamond"+ i, score: 100));
             }
 
-            // One Axe
+            // Replace this incorrect instantiation
             possibleCollectiable.Add(new Axe("OnlyAxe"));
 
-            // One MagicWand
+            // With this correct instantiation
             possibleCollectiable.Add(new MagicWand("OnlyMagicWand"));
 
             // Associate the CollectionBoard object to all the possible Collectiables
@@ -41,17 +41,23 @@ namespace Lab3App
             // Create an empty list to start collecting 
             List<Collectable> collected = new List<Collectable>();
 
-            //Collect the items one-by-one in a foreach loop
+            // Collect the items one-by-one in a foreach loop
             foreach (Collectable collectable in possibleCollectiable)
-            { 
+            {
                 collectable.AddMe(collected);
+                // Invoke DoAction() if the item is a Tool
+                if (collectable is Tool tool)
+                {
+                    tool.DoAction();
+                }
             }
 
             Console.WriteLine("========================================");
             Console.WriteLine("==== All the Collected items ===========");
             Console.WriteLine("========================================");
-            //Display all what was collected in a for each loop
-            foreach (Collectable collectable in possibleCollectiable)
+
+            // Display all collected items once
+            foreach (Collectable collectable in collected)
             {
                 collectable.Display();
             }
